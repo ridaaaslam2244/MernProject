@@ -1,6 +1,15 @@
 import React from "react";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Home() {
+  var handleSuccess = function (response) {
+    console.log(response.credential);
+  };
+
+  var handleError = function () {
+    console.log("Login Failed");
+  };
+
   return (
     <div
       style={{
@@ -35,13 +44,19 @@ function Home() {
           style={{
             display: "flex",
             gap: "30px",
+            alignItems: "center",
           }}
         >
           <span>Home</span>
           <span>Products</span>
           <span>Collections</span>
           <span>Cart 🛍️</span>
-          <span>Login</span>
+          <GoogleLogin
+            onSuccess={handleSuccess}
+            onError={handleError}
+            size="medium"
+            shape="rectangular"
+          />
         </div>
       </nav>
 
@@ -229,7 +244,7 @@ function Home() {
   );
 }
 
-const categoryStyle = {
+var categoryStyle = {
   width: "220px",
   padding: "30px 20px",
   backgroundColor: "white",
@@ -237,7 +252,7 @@ const categoryStyle = {
   boxShadow: "0 3px 10px #ddd",
 };
 
-const productStyle = {
+var productStyle = {
   width: "230px",
   padding: "15px",
   backgroundColor: "white",
@@ -245,7 +260,7 @@ const productStyle = {
   boxShadow: "0 3px 10px #ddd",
 };
 
-const productImageStyle = {
+var productImageStyle = {
   height: "200px",
   backgroundColor: "#e8ddd2",
   display: "flex",
